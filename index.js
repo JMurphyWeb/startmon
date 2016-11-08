@@ -15,7 +15,7 @@ fs.watch(__dirname, {}, (eventType, filename) => {
   console.log('killing child process');
   process.kill(child.pid)
   console.log('restarting new instance');
-  child.spawn(process.execPath, [process.argv[2]])
+  child = spawn(process.execPath, [process.argv[2]])
 })
 
 child = spawn(process.execPath, [process.argv[2]])
