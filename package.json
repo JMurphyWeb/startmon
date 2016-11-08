@@ -1,0 +1,13 @@
+{
+  "name": "nodemon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "nodemon": "node index.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
