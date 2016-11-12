@@ -9,7 +9,6 @@ console.log(process.execPath)
 
 // watch several files/directories
 fs.watch(__dirname, {}, () => {
-  console.log('watched file changed', child.pid)
   process.kill(child.pid)
   child = spawn(process.execPath, [process.argv[2]])
   child.stdout.on('data', function (data) {
@@ -21,12 +20,6 @@ fs.watch(__dirname, {}, () => {
 child = spawn(process.execPath, [process.argv[2]])
 
 // Add an event listener to child process
-// function listenToChild (child) {
-  child.stdout.on('data', function (data) {
-    console.log(data.toString())
-  })
-// }
-
-
-// Listen to child
-// listenToChild(child)
+child.stdout.on('data', function (data) {
+  console.log(data.toString())
+})
