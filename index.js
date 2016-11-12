@@ -5,24 +5,28 @@ var fs = require('fs')
 var spawn = require('child_process').spawn
 var child
 
-
-console.log(process.execPath);
+console.log(process.execPath)
 
 // watch several files/directories
-fs.watch(__dirname, {}, (eventType, filename) => {
-  // console.log('watch event triggered', eventType, filename)
-  // how to re-run the application when a change is detected
-  // console.log('killing child process')
+fs.watch(__dirname, {}, () => {
+  console.log('watched file changed', child.pid)
   process.kill(child.pid)
-  // console.log('restarting new instance')
   child = spawn(process.execPath, [process.argv[2]])
+  child.stdout.on('data', function (data) {
+    console.log(data.toString())
+  })
 })
 
+// Create child process
 child = spawn(process.execPath, [process.argv[2]])
 
-// child.stdout.on('data', function (data) {
-//   console.log('message from the child: ', data.toString())
-// })
+// Add an event listener to child process
+// function listenToChild (child) {
+  child.stdout.on('data', function (data) {
+    console.log(data.toString())
+  })
+// }
 
-// stretch goals
-// How to add the startmon command to this directory
+
+// Listen to child
+// listenToChild(child)
